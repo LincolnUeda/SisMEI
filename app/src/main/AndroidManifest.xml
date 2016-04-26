@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.lincolnueda.sismei" >
+
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/sismei_icon"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".actLogin"
+            android:label="@string/title_activity_act_login" >
+        </activity>
+        <activity
+            android:name=".Cadastros.actEditaUsuario"
+            android:label="@string/title_activity_act_edita_usuario" >
+        </activity>
+        <activity
+            android:name=".Cadastros.actClienteFornecedor"
+            android:label="@string/title_activity_act_cliente_fornecedor" >
+        </activity>
+        <activity
+            android:name=".Listas_Cadastro.actListaCliFor"
+            android:label="@string/title_activity_act_lista_cli_for" >
+        </activity>
+        <activity
+            android:name=".Listas_Cadastro.actListaEndereco"
+            android:label="@string/title_activity_act_lista_endereco" >
+        </activity>
+        <activity
+            android:name=".Cadastros.actCadEndereco"
+            android:label="@string/title_activity_act_cad_endereco" >
+        </activity>
+        <activity
+            android:name=".Listas_Cadastro.actListaTelefone"
+            android:label="@string/lblTelefones" >
+        </activity>
+        <activity
+            android:name=".Cadastros.actCadTelefone"
+            android:label="@string/title_activity_act_cad_telefone" >
+        </activity>
+        <activity
+            android:name=".Listas_Cadastro.actListaEmail"
+            android:label="@string/lblEmail" >
+        </activity>
+        <activity
+            android:name=".Cadastros.actCadEmail"
+            android:label="@string/lblEmail" >
+        </activity>
+        <activity
+            android:name=".Listas_Cadastro.actListaMateriais"
+            android:label="@string/title_activity_act_lista_materiais" >
+        </activity>
+        <activity
+            android:name=".Cadastros.actCadMaterial"
+            android:label="@string/title_activity_act_cad_material" >
+        </activity>
+        <activity
+            android:name=".Listas_Cadastro.actListaOrcamento"
+            android:label="@string/title_activity_act_lista_orcamento" >
+        </activity>
+        <activity
+            android:name=".Cadastros.actCadOrcamento"
+            android:label="@string/title_activity_act_cad__orcamento" >
+        </activity>
+        <activity
+            android:name=".Cadastros.actAdicMaterialOrc"
+            android:label="@string/title_activity_act_adic_material" >
+        </activity>
+        <activity
+            android:name=".Listas_Cadastro.actListaProduto"
+            android:label="@string/title_activity_act_lista_produto" >
+        </activity>
+        <activity
+            android:name=".Cadastros.actCadProduto"
+            android:label="@string/title_activity_act_cad_produto" >
+        </activity>
+        <activity
+            android:name=".Cadastros.actAdicMaterialProd"
+            android:label="@string/title_activity_act_adic_material_prod" >
+        </activity>
+        <activity
+            android:name=".Listas_Cadastro.actListaPedido"
+            android:label="@string/title_activity_act_lista_pedido" >
+        </activity>
+        <activity
+            android:name=".Cadastros.actCadPedido"
+            android:label="@string/title_activity_act_cad_pedido" >
+        </activity>
+        <activity
+            android:name=".Cadastros.actAdicProd"
+            android:label="@string/title_activity_act_adic_prod" >
+        </activity>
+        <activity
+            android:name=".Listas_Cadastro.actListaEtapaProducao"
+            android:label="@string/title_activity_act_lista_etapa_producao" >
+        </activity>
+        <activity
+            android:name=".Cadastros.actCadEtapaProducao"
+            android:label="@string/title_activity_act_cad_etapa_producao" >
+        </activity>
+        <activity
+            android:name=".Listas_Cadastro.actListaFinanceiro"
+            android:label="@string/title_activity_act_lista_financeiro" >
+        </activity>
+        <activity
+            android:name=".Cadastros.actCadFinanceiro"
+            android:label="@string/title_activity_act_cad_financeiro" >
+        </activity>
+        <activity
+            android:name=".actTabCadPedido"
+            android:label="@string/title_activity_act_tab_cad_pedido" >
+        </activity>
+        <activity
+            android:name=".Relatorios.actRelFinanceiro"
+            android:label="@string/title_activity_act_rel_financeiro" >
+        </activity>
+        <activity
+            android:name=".actBase"
+            android:label="@string/title_activity_act_base" >
+        </activity>
+        <activity
+            android:name=".actEmpresa"
+            android:label="@string/title_activity_act_empresa" >
+        </activity>
+        <activity
+            android:name=".actBandoDados"
+            android:label="@string/title_activity_act_bando_dados" >
+        </activity>
+    </application>
+
+</manifest>

@@ -1,0 +1,71 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    tools:context="com.lincolnueda.sismei.Relatorios.actRelFinanceiro">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/scrollView17" >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/Lay_Rel">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/lblDataIni"
+                android:id="@+id/textView39" />
+
+            <EditText
+                android:layout_width="148dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/edtRelDatIni" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/lblDatFin"
+                android:id="@+id/textView40"
+                android:layout_marginTop="20dp" />
+
+            <EditText
+                android:layout_width="153dp"
+                android:layout_height="wrap_content"
+                android:id="@+id/edtRelDatFin" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceMedium"
+                android:text="@string/lblTipo"
+                android:id="@+id/textView41"
+                android:layout_marginTop="20dp" />
+
+            <Spinner
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/spnTipoRel"
+                android:layout_weight="1" />
+
+            <Button
+                android:layout_width="273dp"
+                android:layout_height="wrap_content"
+                android:text="@string/lblOK"
+                android:id="@+id/btnRelOK"
+                android:layout_gravity="center_vertical"
+                android:background="@color/CorBotao"
+                android:textColor="@color/CortextoBotao"
+                android:layout_marginTop="20dp" />
+
+        </LinearLayout>
+    </ScrollView>
+</LinearLayout>

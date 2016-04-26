@@ -1,0 +1,20 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="com.lincolnueda.sismei.Cadastros.actAdicMaterialOrc">
+
+    <item android:id="@+id/action_usuario" android:title="Usuario"
+        android:orderInCategory="100" app:showAsAction="never" />
+
+    <item android:id="@+id/action_mainmenu" android:title="Menu Principal"
+        android:orderInCategory="100" app:showAsAction="never" />
+
+    <item android:id="@+id/action_empresa" android:title="Dados da Empresa"
+        android:orderInCategory="100" app:showAsAction="never" />
+
+    <item android:id="@+id/action_BancoDados" android:title="Banco de Dados"
+        android:orderInCategory="100" app:showAsAction="never" />
+
+    <item android:id="@+id/action_sair" android:title="Sair"
+        android:orderInCategory="100" app:showAsAction="never" />
+</menu>

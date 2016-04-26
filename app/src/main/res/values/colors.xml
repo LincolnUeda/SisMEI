@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="CorBotao">#ff2a912a</color>
+    <color name="CortextoBotao">#fff</color>
+    <color name="transp">#00ffffff</color>
+</resources>
