@@ -49,7 +49,7 @@ public class CopyDB {
         FileChannel source = null;
         FileChannel destination = null;
         String currentDBPath = "/data/" + "com.lincolnueda.sismei" + "/databases/" + "SisMEIDB";
-        String backupDBPath = Environment.DIRECTORY_DOCUMENTS + "/SisMEI/Backup/SisMEIDB.db";
+        String backupDBPath = Environment.getExternalStorageDirectory() + "/SisMEI/Backup/SisMEIDB.db";
         File currentDB = new File(data, currentDBPath);
         File backupDB = new File(sd, backupDBPath);
         try {
@@ -70,7 +70,7 @@ public class CopyDB {
         File data = Environment.getDataDirectory();
         FileChannel source = null;
         FileChannel destination = null;
-        String currentDBPath = Environment.DIRECTORY_DOCUMENTS + "/SisMEI/Backup/SisMEIDB.db";// "/data/"+ "com.lincolnueda.sismei" +"/databases/"+ "SisMEIDB";
+        String currentDBPath = Environment.getExternalStorageDirectory() + "/SisMEI/Backup/SisMEIDB.db";// "/data/"+ "com.lincolnueda.sismei" +"/databases/"+ "SisMEIDB";
         String backupDBPath = "/data/" + "com.lincolnueda.sismei" + "/databases/" + "SisMEIDB";// "backups/SisMEIDB.db";
         File currentDB = new File(sd, currentDBPath);
         File backupDB = new File(data, backupDBPath);
