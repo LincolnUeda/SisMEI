@@ -23,6 +23,8 @@ import java.text.DateFormat;
 /**
  * Created by Lincoln Ueda on 17/02/2016.
  */
+
+
 public class PdfPedido {
     File myFile;
     PdfPCell cell;
@@ -31,9 +33,9 @@ public class PdfPedido {
     public File CreatePDF(Pedido pedido) throws IOException, DocumentException {
 
         File pdfFolder = Utilidades.CreateDir("Pedidos");
-        myFile = new File(pdfFolder + "/Pedido No " + pedido.getCodPed() + ".pdf"); //cria o arquivo no diret?rio
+        myFile = new File(pdfFolder + "/Pedido No " + pedido.getCodPed() + ".pdf"); //cria o arquivo no diretorio
         OutputStream output = new FileOutputStream(myFile);
-        Document document = new Document(PageSize.A4); // PageSize.A4 cria o documento no tamanho especificado( Existem outros tamanhos)
+        Document document = new Document(PageSize.A4); // PageSize.A4 cria o documento no tamanho especificado
 
         PdfWriter.getInstance(document, output);
         document.open();//abre o arquivo para edi??o
@@ -92,8 +94,7 @@ public class PdfPedido {
         int i = 0;
         do{
             Produto produto = pedido.getListaProdutos().get(i);
-            //String report = (i+ 1) + Utilidades.padRight(produto.getNomeProd(),20) + " " + Utilidades.padRight(String.valueOf(produto.getQuant()),4) + " R$ " + String.format("%-4s",String.valueOf((produto.getPrecoProd() * produto.getQuant())).trim());
-            //document.add(new Paragraph(report));
+
             String report = String.valueOf((i+ 1));
             cell = new PdfPCell(Phrase.getInstance(report));
             table.addCell(cell);

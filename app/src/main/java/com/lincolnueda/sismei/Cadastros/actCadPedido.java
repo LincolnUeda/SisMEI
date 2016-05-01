@@ -364,17 +364,20 @@ public class actCadPedido extends TabActivity implements View.OnClickListener, A
     private void Salvar(){
         int teste = 0;
         try {
+
             pedido.setCodPed(Integer.parseInt(edtCodPed.getText().toString()));
             String nota = edtNumNota.getText().toString();
-            if (nota.isEmpty())
-                nota = "0";
+            if (nota.isEmpty()) //caso nao tenha sido digitado o codigo da nota,
+                nota = "0";    // ele sera gravado como zero
             pedido.setNumNota(Integer.parseInt(nota));
             pedido.setStatus(spnStatus.getSelectedItem().toString());
 
+            //configura etapa de produção do pedido
             RepositorioEtapaProducao repEtapa = new RepositorioEtapaProducao(conn);
             int codetapa = Integer.parseInt(edtEtapa.getText().toString());
             pedido.setEtapaProducao(repEtapa.EncontraEtapa(conn,codetapa));
 
+            //configura cliente do pedido
             RepositorioClienteFornecedor repCliente = new RepositorioClienteFornecedor(conn);
             int codcli = Integer.parseInt(edtCodClientePed.getText().toString());
             pedido.setCliente(repCliente.EncontraClienteFornecedor(conn, codcli, "cli"));
@@ -469,8 +472,11 @@ public class actCadPedido extends TabActivity implements View.OnClickListener, A
     private void RetiraEstoque(){
         final Pedido pedido2 = pedido;
         //metodo retira do estoque a quantidade de cada material que será usada para produzir o pedido
+
+        //Mensagem que sera exibida caso algum material seja insuficiente
         String msg = "Atenção: \n Materiais no estoque são insuficientes para este pedido.";
         msg += "\n Foi gerado um arquivo PDF com os materiais e a quantidade necessária.\n Pressione OK para visualisar";
+
         final ArrayList<String>listaMaterial = new ArrayList<>();
         int flagmsg = 0;
 
@@ -487,8 +493,8 @@ public class actCadPedido extends TabActivity implements View.OnClickListener, A
                 double quantusada = mat.getQuant() * prod.getQuant();
 
                 RepositorioMaterial repMat = new RepositorioMaterial(conn);
-                Material mat2 = repMat.EncontraMaterial(conn,mat.getCodmat()); //material cadastrado no sistema, com quantidade do estoque
-
+                Material mat2 = repMat.EncontraMaterial(conn,mat.getCodmat()); //material cadastrado no sistema,
+                                                                               // com quantidade do estoque
                 if (mat2.getQuant() > quantusada) {
                     mat2.setQuant(mat2.getQuant() - quantusada);//retira a quantidade usada no pedido;
                 }else{
@@ -497,7 +503,10 @@ public class actCadPedido extends TabActivity implements View.OnClickListener, A
                     mat3= mat2;
                     mat3.setQuant(diferenca);
 
-                    listaMaterial.add(mat3.getCodmat() + "." + Utilidades.padRight(mat3.getNomemat(), 20) + " " + Utilidades.padRight(String.valueOf(mat3.getQuant()), 4) + " " + mat3.getUnidmed());
+                    listaMaterial.add(mat3.getCodmat() + "."
+                            + Utilidades.padRight(mat3.getNomemat(), 20) + " "
+                            + Utilidades.padRight(String.valueOf(mat3.getQuant()), 4)
+                            + " " + mat3.getUnidmed());
 
                     mat2.setQuant(0);
                     flagmsg = 1;
@@ -512,21 +521,23 @@ public class actCadPedido extends TabActivity implements View.OnClickListener, A
         }while(i < maxped);
 
         if (flagmsg == 1){
-            AlertDialog.Builder msg1 = new AlertDialog.Builder(this);
-            msg1.setMessage(msg);
-            msg1.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+            AlertDialog.Builder msgSemMat = new AlertDialog.Builder(this);
+            msgSemMat.setMessage(msg);
+
+            //botao OK ira gerar um arquivo PDF com os materiais insuficientes e a quantidade necessaria
+            msgSemMat.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     //abrir pdf
                     File myFile = null;
                     PdfListaMateriaisPedido pdf = new PdfListaMateriaisPedido();
                     try {
-                        myFile =  pdf.CreatePDF(listaMaterial,pedido2);
+                        myFile = pdf.CreatePDF(listaMaterial, pedido2);
                     } catch (FileNotFoundException e) {
                         Mensagem(e.getMessage());
                     } catch (DocumentException e) {
                         Mensagem(e.getMessage());
-                    } catch (Exception e){
+                    } catch (Exception e) {
                         Mensagem(e.getMessage());
                     }
 
@@ -538,25 +549,28 @@ public class actCadPedido extends TabActivity implements View.OnClickListener, A
 
                 }
             });
-            msg1.setNegativeButton("Fechar", new DialogInterface.OnClickListener() {
+            msgSemMat.setNegativeButton("Fechar", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     dialog.dismiss();
                 }
             });
-            msg1.show();
+            msgSemMat.show();
         }
 
     }
 
     private void CadastrarParcelas(){
+        //metodo ira cadasttrar as parcelas do pagamento do pedido
         int numparc = 1;
         double valortotal = financeiro.getValor();
         do{
 
             financeiro.setValor(valortotal / financeiro.getTotalparcelas());
             financeiro.setNumparcela(numparc);
-            financeiro.setDescricao("Pedido nº " + pedido.getCodPed() + "(Parcela " + financeiro.getNumparcela() + "/"+ financeiro.getTotalparcelas() + ")");
+            financeiro.setDescricao("Pedido nº " + pedido.getCodPed() + "(Parcela "
+                    + financeiro.getNumparcela() + "/"+ financeiro.getTotalparcelas() + ")");
+
             repFinan.Inserir(financeiro);
 
             Date data = financeiro.getDataVenc();
