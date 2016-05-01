@@ -112,7 +112,7 @@
     <string name="title_activity_act_empresa">actEmpresa</string>
     <string name="lblnomeEmpresa">Nome da Empresa</string>
     <string name="lblCnpj">CNPJ</string>
-    <string name="title_activity_act_bando_dados">actBandoDados</string>
+    <string name="title_activity_act_bando_dados">Banco de Dados</string>
     <string name="lblImportar">Importar</string>
     <string name="lblExportar">Exportar</string>
 </resources>

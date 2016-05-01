@@ -1,10 +1,7 @@
 package com.lincolnueda.sismei;
 
 import android.app.AlertDialog;
-import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
 
@@ -20,7 +17,7 @@ public class actBandoDados extends actBase implements View.OnClickListener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_act_bando_dados);
+        setContentView(R.layout.act_banco_dados);
 
         btnImportar = (ImageButton) findViewById(R.id.btnImportar);
         btnExportar = (ImageButton) findViewById(R.id.btnExportar);
