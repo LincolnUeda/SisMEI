@@ -273,6 +273,7 @@ public class MainActivity extends actBase  implements View.OnClickListener{
                // btnTeste.setVisibility(View.VISIBLE);
             if (usuario.getLogado() == 1)
                     layMain.setVisibility(View.VISIBLE);
+
             }else {
                     SemUsuario();
 

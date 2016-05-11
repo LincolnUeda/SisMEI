@@ -363,56 +363,60 @@ public class actCadPedido extends TabActivity implements View.OnClickListener, A
 
     private void Salvar(){
         int teste = 0;
-        try {
-
-            pedido.setCodPed(Integer.parseInt(edtCodPed.getText().toString()));
-            String nota = edtNumNota.getText().toString();
-            if (nota.isEmpty()) //caso nao tenha sido digitado o codigo da nota,
-                nota = "0";    // ele sera gravado como zero
-            pedido.setNumNota(Integer.parseInt(nota));
-            pedido.setStatus(spnStatus.getSelectedItem().toString());
-
-            //configura etapa de produção do pedido
-            RepositorioEtapaProducao repEtapa = new RepositorioEtapaProducao(conn);
-            int codetapa = Integer.parseInt(edtEtapa.getText().toString());
-            pedido.setEtapaProducao(repEtapa.EncontraEtapa(conn,codetapa));
-
-            //configura cliente do pedido
-            RepositorioClienteFornecedor repCliente = new RepositorioClienteFornecedor(conn);
-            int codcli = Integer.parseInt(edtCodClientePed.getText().toString());
-            pedido.setCliente(repCliente.EncontraClienteFornecedor(conn, codcli, "cli"));
-
-        }catch (Exception ex){
-
-            Mensagem("Erro " + ex.getMessage());
+        if (edtDataVencPed.equals("") && edtNumParcPed.equals("")){
+            Mensagem("Aten\u00e7\u00e3o\n Campos Data de Vencimento e N\u00famero de Parcelas s\u00e3o orbrigat\u00f3rios!");
         }
-        int cod = repositorio.BuscaCodigo(this, pedido);
-        if (cod == 0){
+        else {
             try {
+
+                pedido.setCodPed(Integer.parseInt(edtCodPed.getText().toString()));
+                String nota = edtNumNota.getText().toString();
+                if (nota.isEmpty()) //caso nao tenha sido digitado o codigo da nota,
+                    nota = "0";    // ele sera gravado como zero
+                pedido.setNumNota(Integer.parseInt(nota));
+                pedido.setStatus(spnStatus.getSelectedItem().toString());
+
+                //configura etapa de produção do pedido
+                RepositorioEtapaProducao repEtapa = new RepositorioEtapaProducao(conn);
+                int codetapa = Integer.parseInt(edtEtapa.getText().toString());
+                pedido.setEtapaProducao(repEtapa.EncontraEtapa(conn, codetapa));
+
+                //configura cliente do pedido
+                RepositorioClienteFornecedor repCliente = new RepositorioClienteFornecedor(conn);
+                int codcli = Integer.parseInt(edtCodClientePed.getText().toString());
+                pedido.setCliente(repCliente.EncontraClienteFornecedor(conn, codcli, "cli"));
+
+            } catch (Exception ex) {
+
+                Mensagem("Erro " + ex.getMessage());
+            }
+            int cod = repositorio.BuscaCodigo(this, pedido);
+            if (cod == 0) {
+                try {
+                    if (pedido.getListaProdutos().size() > 0) {
+                        repositorio.Inserir(pedido);
+                        SalvarFinanceiro(); //cadastra no sistema recebimento referente ao pedido
+                        RetiraEstoque(); // retira do estoque de materiais a quantidade usada o pedido
+                        Mensagem("Pedido Cadastrado.");
+                        Limpar();
+                    } else {
+                        Mensagem("Atenção: \n Não é possivel cadastrar um pedido sem produtos.");
+                    }
+                } catch (Exception Ex) {
+                    Mensagem("Erro: " + Ex.getMessage());
+                }
+
+            } else {
                 if (pedido.getListaProdutos().size() > 0) {
-                    repositorio.Inserir(pedido);
-                    SalvarFinanceiro(); //cadastra no sistema recebimento referente ao pedido
-                    RetiraEstoque(); // retira do estoque de materiais a quantidade usada o pedido
-                    Mensagem("Pedido Cadastrado.");
-                    Limpar();
-                }else{
+                    repositorio.Alterar(pedido);
+                    SalvarFinanceiro();
+                    Mensagem("Pedido Atualizado.");
+                } else {
                     Mensagem("Atenção: \n Não é possivel cadastrar um pedido sem produtos.");
                 }
-            } catch( Exception Ex){
-                Mensagem("Erro: " + Ex.getMessage());
             }
 
-        } else {
-            if (pedido.getListaProdutos().size() > 0) {
-                repositorio.Alterar(pedido);
-                SalvarFinanceiro();
-                Mensagem("Pedido Atualizado.");
-            }else {
-                Mensagem("Atenção: \n Não é possivel cadastrar um pedido sem produtos.");
-            }
         }
-
-
     }
 
     private void SalvarFinanceiro(){
