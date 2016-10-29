@@ -30,6 +30,7 @@ import com.lincolnueda.sismei.Entidades.Material;
 import com.lincolnueda.sismei.Entidades.Orcamento;
 import com.lincolnueda.sismei.R;
 import com.lincolnueda.sismei.Relatorios.PdfOrcamento;
+import com.lincolnueda.sismei.Utilidades;
 import com.lincolnueda.sismei.actBase;
 
 import java.io.File;
@@ -112,6 +113,10 @@ public class actCadOrcamento extends actBase implements View.OnClickListener, Ad
                 orcamento = (Orcamento) bundle.getSerializable("orcamento");
                 if (orcamento.getCodorc() != 0)
                     btnPdfOrc.setVisibility(View.VISIBLE);
+                else {
+                    ConexaoBanco();
+                    edtCodOrc.setText(String.valueOf(Utilidades.AutoCodigo("Orcamento", "_id", conn)));
+                }
                 ConexaoBanco();
                 PreencheCampos();
             }

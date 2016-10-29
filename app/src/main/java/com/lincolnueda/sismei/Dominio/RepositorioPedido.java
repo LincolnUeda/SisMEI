@@ -97,7 +97,7 @@ public class RepositorioPedido {
     }
 
     public int BuscaCodigo(Context context,Pedido pedido){
-        //Verifica se o codigo do orçamento digitado já existe, para fazer update
+        //Verifica se o codigo do pedido digitado já existe, para fazer update
         Cursor cursor =conn.query("Pedido",null,null,null,null,null,null);
         cursor.moveToFirst();
         int cod = 0;

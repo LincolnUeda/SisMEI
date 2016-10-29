@@ -109,7 +109,7 @@
     <string name="lblTipoTel">Tipo de Telefone</string>
     <string name="lblCadastraEmail">Cadastrar Email</string>
     <string name="lblCodEmail">Cod. Email</string>
-    <string name="title_activity_act_empresa">actEmpresa</string>
+    <string name="title_activity_act_empresa">Dados da Empresa</string>
     <string name="lblnomeEmpresa">Nome da Empresa</string>
     <string name="lblCnpj">CNPJ</string>
     <string name="title_activity_act_bando_dados">Banco de Dados</string>

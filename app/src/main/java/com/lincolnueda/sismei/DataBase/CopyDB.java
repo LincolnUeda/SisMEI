@@ -49,7 +49,7 @@ public class CopyDB {
         FileChannel source = null;
         FileChannel destination = null;
         String currentDBPath = "/data/" + "com.lincolnueda.sismei" + "/databases/" + "SisMEIDB";
-        String backupDBPath = Environment.getExternalStorageDirectory() + "/SisMEI/Backup/SisMEIDB.db";
+        String backupDBPath = /*Environment.getExternalStorageDirectory() + */"/SisMEI/Backup/SisMEIDB.db";
         File currentDB = new File(data, currentDBPath);
         File backupDB = new File(sd, backupDBPath);
         try {

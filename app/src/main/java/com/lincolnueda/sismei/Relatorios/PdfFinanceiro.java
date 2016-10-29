@@ -14,9 +14,6 @@ import com.itextpdf.text.pdf.PdfPCell;
 import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import com.lincolnueda.sismei.DataBase.DataBase;
-import com.lincolnueda.sismei.Dominio.RepositorioClienteFornecedor;
-import com.lincolnueda.sismei.Entidades.ClienteFornecedor;
-import com.lincolnueda.sismei.Entidades.Financeiro;
 import com.lincolnueda.sismei.Utilidades;
 
 import java.io.File;
@@ -24,7 +21,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.text.DateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 
 /**

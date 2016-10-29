@@ -19,6 +19,7 @@ import com.lincolnueda.sismei.Dominio.RepositorioMaterial;
 import com.lincolnueda.sismei.Entidades.ClienteFornecedor;
 import com.lincolnueda.sismei.Entidades.Material;
 import com.lincolnueda.sismei.R;
+import com.lincolnueda.sismei.Utilidades;
 import com.lincolnueda.sismei.actBase;
 
 
@@ -64,34 +65,12 @@ public class actCadMaterial extends actBase implements View.OnClickListener{
         if (bundle != null) {
             if (bundle.containsKey("material")){
                 material = (Material) bundle.getSerializable("material");
+                if (material.getCodmat() == 0)
+                    edtcodMaterial.setText(String.valueOf(Utilidades.AutoCodigo("Material", "_id", conn)));
                     PreencheCampos();
                 }
             }
         }
-
-
-
-   /* @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_act_cad_material, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
 
     private void PreencheCampos(){
         if (material.getCodmat() != 0){

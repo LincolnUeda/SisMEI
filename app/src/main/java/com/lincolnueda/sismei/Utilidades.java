@@ -1,6 +1,14 @@
 package com.lincolnueda.sismei;
 
+import android.app.AlertDialog;
+import android.database.Cursor;
+import android.database.SQLException;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Environment;
+
+import com.lincolnueda.sismei.DataBase.DataBase;
+import com.lincolnueda.sismei.Dominio.RepositorioFinanceiro;
+import com.lincolnueda.sismei.Dominio.RepositorioPedido;
 
 import java.io.File;
 
@@ -19,6 +27,21 @@ public class Utilidades {
     }
 
 
+    public static int AutoCodigo(String table, String column,SQLiteDatabase conn){
+        //Busca  o ultimo codigo da tabela e retorna o numero seguinte
+        int cod = 0;
+        try {
+            Cursor codigo = conn.query(table, new String[]{column}, null, null, null, null, column + " DESC");
+            codigo.moveToFirst();
+            cod = codigo.getInt(0);
+            cod += 1;
+        }catch(Exception e){
+
+        }
+        if(cod == 0)
+                cod = 1;
+        return cod;
+    }
 
     public static  File CreateDir(String pasta) {
         //criar diretorio para salvar arquivos

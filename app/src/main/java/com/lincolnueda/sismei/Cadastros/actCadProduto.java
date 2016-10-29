@@ -22,6 +22,7 @@ import com.lincolnueda.sismei.Dominio.RepositorioProduto;
 import com.lincolnueda.sismei.Entidades.Material;
 import com.lincolnueda.sismei.Entidades.Produto;
 import com.lincolnueda.sismei.R;
+import com.lincolnueda.sismei.Utilidades;
 import com.lincolnueda.sismei.actBase;
 
 import java.util.ArrayList;
@@ -75,6 +76,11 @@ public class actCadProduto extends actBase implements View.OnClickListener, Adap
         if (bundle != null){
             if (bundle.containsKey("produto")){
                 produto = (Produto) bundle.getSerializable("produto");
+                if (produto.getCodProd() == 0){
+                    ConexaoBanco();
+                    edtCodrod.setText(String.valueOf(Utilidades.AutoCodigo("Produto", "_id", conn)));
+                }
+
                 ConexaoBanco();
                 PreencheCampos();
 

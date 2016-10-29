@@ -119,28 +119,6 @@ public class actCadFinanceiro extends actBase implements View.OnClickListener {
 
     }
 
-   /* @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_act_cad_financeiro, menu);
-        return true;
-
-            }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }*/
 
     @Override
     public void onClick(View v) {
@@ -246,11 +224,12 @@ public class actCadFinanceiro extends actBase implements View.OnClickListener {
     private void CadastrarParcelas(){
         int numparc = 1;
         double valortotal = financeiro.getValor();
+        String desc = financeiro.getDescricao();
         do{
 
             financeiro.setValor(valortotal / financeiro.getTotalparcelas());
             financeiro.setNumparcela(numparc);
-            String desc = financeiro.getDescricao();
+
             financeiro.setDescricao(desc + "( Parcela " + financeiro.getNumparcela() + "/" + financeiro.getTotalparcelas() + ")");
             repositorio.Inserir(financeiro);
 

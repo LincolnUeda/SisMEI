@@ -22,6 +22,7 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     compile 'com.android.support:appcompat-v7:22.2.1'
-    compile files('src/main/libs/itextg-5.5.4.jar')
-    compile 'com.itextpdf:itext-pdfa:5.5.8'
+    compile files('libs/itextg-5.5.9.jar')
+
+    compile 'com.google.android.gms:play-services-appindexing:8.4.0'
 }
