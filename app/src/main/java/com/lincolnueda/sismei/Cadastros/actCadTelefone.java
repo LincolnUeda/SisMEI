@@ -13,6 +13,7 @@ import com.lincolnueda.sismei.Dominio.RepositorioTelefone;
 import com.lincolnueda.sismei.Entidades.ClienteFornecedor;
 import com.lincolnueda.sismei.Entidades.Telefone;
 import com.lincolnueda.sismei.R;
+import com.lincolnueda.sismei.Utilidades;
 import com.lincolnueda.sismei.actBase;
 
 
@@ -54,6 +55,8 @@ public class actCadTelefone extends actBase implements View.OnClickListener{
                 telefone = (Telefone) bundle.getSerializable("telefone");
                 clifor = telefone.getClienteFornecedor();
                 ConexaoBanco();
+                if (telefone.getCodTel() ==0)
+                    edtCodTel.setText(String.valueOf(Utilidades.AutoCodigo("Telefone", "_id", conn,"clientefornecedor = ? and tipoclifor = ?",new String[]{String.valueOf(telefone.getClienteFornecedor().getCodCliFor()),String.valueOf(telefone.getClienteFornecedor().getTipo())})));
                 PreencheCampos();
 
             }

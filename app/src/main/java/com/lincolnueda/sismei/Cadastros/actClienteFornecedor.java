@@ -24,6 +24,7 @@ import com.lincolnueda.sismei.Listas_Cadastro.actListaEmail;
 import com.lincolnueda.sismei.Listas_Cadastro.actListaTelefone;
 import com.lincolnueda.sismei.R;
 import com.lincolnueda.sismei.Listas_Cadastro.actListaEndereco;
+import com.lincolnueda.sismei.Utilidades;
 import com.lincolnueda.sismei.actBase;
 
 
@@ -94,18 +95,20 @@ public class actClienteFornecedor extends actBase implements OnClickListener{
                 lblRgInsc.setText("RG/Insc. Estadual Cliente");
                 lblCnpjCpf.setText("CPF/CNPJ Cliente");
                 clifor = (ClienteFornecedor) bundle.getSerializable("cliente");
-
-
-
             }
+
             if (bundle.containsKey("fornecedor")) {
                 lblCodCliFor.setText("Cód. Fornecedor");
                 lblNomeCliFor.setText("Nome Fornecedor");
                 lblRgInsc.setText("RG/Insc. Estadual Fornecedor");
                 lblCnpjCpf.setText("CPF/CNPJ Fornecedor");
                 clifor = (ClienteFornecedor) bundle.getSerializable("fornecedor");
-
             }
+            if (clifor.getCodCliFor() == 0){
+                ConexaoBanco();
+                edtCodCliFor.setText(String.valueOf(Utilidades.AutoCodigo("ClienteFornecedor", "_id", conn,"tipo",new String[]{String.valueOf(clifor.getTipo())})));
+            }
+
             PreencheCampos();
         }
         }

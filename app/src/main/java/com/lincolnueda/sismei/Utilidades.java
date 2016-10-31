@@ -43,6 +43,28 @@ public class Utilidades {
         return cod;
     }
 
+    public static int AutoCodigo(String table, String column,SQLiteDatabase conn,String where,String whereArg[]){
+        /*Busca  o ultimo codigo da tabela e retorna o numero seguinte,
+        de acordo com a condição recebida
+        Parâmetros:
+        where: colunas que fazem parte da condição
+        where Arg: vetor com valores que as colunas devem ter para satisfazer a condição
+
+        */
+        int cod = 0;
+        try {
+            Cursor codigo = conn.query(table, new String[]{column}, where + "= ?",whereArg, null, null, column + " DESC");
+            codigo.moveToFirst();
+            cod = codigo.getInt(0);
+            cod += 1;
+        }catch(Exception e){
+
+        }
+        if(cod == 0)
+            cod = 1;
+        return cod;
+    }
+
     public static  File CreateDir(String pasta) {
         //criar diretorio para salvar arquivos
         String teste = "";

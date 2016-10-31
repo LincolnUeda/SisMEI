@@ -21,6 +21,7 @@ import com.lincolnueda.sismei.Dominio.RepositorioFinanceiro;
 import com.lincolnueda.sismei.Entidades.ClienteFornecedor;
 import com.lincolnueda.sismei.Entidades.Financeiro;
 import com.lincolnueda.sismei.R;
+import com.lincolnueda.sismei.Utilidades;
 import com.lincolnueda.sismei.actBase;
 
 import java.text.DateFormat;
@@ -110,13 +111,8 @@ public class actCadFinanceiro extends actBase implements View.OnClickListener {
             }
         }
         ConexaoBanco();
-
-
-
-
-
-
-
+        if (financeiro.getCodFin() == 0)
+            edtCodFinan.setText(String.valueOf(Utilidades.AutoCodigo("Financeiro", "_id", conn,"tipo",new String[]{String.valueOf(financeiro.getTipo())})));
     }
 
 
@@ -130,9 +126,6 @@ public class actCadFinanceiro extends actBase implements View.OnClickListener {
         }
 
     }
-
-
-
 
 
     private void Salvar(){

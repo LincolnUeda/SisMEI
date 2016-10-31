@@ -16,6 +16,7 @@ import com.lincolnueda.sismei.DataBase.DataBase;
 import com.lincolnueda.sismei.Dominio.RepositorioEtapaProducao;
 import com.lincolnueda.sismei.Entidades.EtapaProducao;
 import com.lincolnueda.sismei.R;
+import com.lincolnueda.sismei.Utilidades;
 import com.lincolnueda.sismei.actBase;
 
 
@@ -50,6 +51,8 @@ public class actCadEtapaProducao extends actBase implements View.OnClickListener
         if (bundle != null) {
             if (bundle.containsKey("etapa")){
                 etapa = (EtapaProducao) bundle.getSerializable("etapa");
+                if (etapa.getCodEtapa() == 0)
+                    edtCodEtapa.setText(String.valueOf(Utilidades.AutoCodigo("EtapaProducao", "_id", conn)));
                 PreencheCampos();
             }
         }

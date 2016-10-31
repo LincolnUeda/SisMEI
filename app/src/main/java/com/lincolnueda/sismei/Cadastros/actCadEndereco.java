@@ -16,6 +16,7 @@ import com.lincolnueda.sismei.Dominio.RepositorioEndereco;
 import com.lincolnueda.sismei.Entidades.ClienteFornecedor;
 import com.lincolnueda.sismei.Entidades.Endereco;
 import com.lincolnueda.sismei.R;
+import com.lincolnueda.sismei.Utilidades;
 import com.lincolnueda.sismei.actBase;
 
 
@@ -59,6 +60,8 @@ public class actCadEndereco extends actBase implements View.OnClickListener{
                 endereco = (Endereco) bundle.getSerializable("endereco");
                 clifor = endereco.getClienteFornecedor();
                 ConexaoBanco();
+                if (endereco.getCodEnd() ==0)
+                    edtCodEnd.setText(String.valueOf(Utilidades.AutoCodigo("Endereco", "_id", conn,"clientefornecedor = ? and tipoclifor = ?",new String[]{String.valueOf(endereco.getClienteFornecedor().getCodCliFor()),String.valueOf(endereco.getClienteFornecedor().getTipo())})));
                 PreencheCampos();
 
             }

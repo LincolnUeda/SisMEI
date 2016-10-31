@@ -13,6 +13,7 @@ import com.lincolnueda.sismei.Dominio.RepositorioEmail;
 import com.lincolnueda.sismei.Entidades.ClienteFornecedor;
 import com.lincolnueda.sismei.Entidades.Email;
 import com.lincolnueda.sismei.R;
+import com.lincolnueda.sismei.Utilidades;
 import com.lincolnueda.sismei.actBase;
 
 
@@ -52,6 +53,9 @@ public class actCadEmail extends actBase implements View.OnClickListener{
                 email = (Email) bundle.getSerializable("email");
                 clifor = email.getClienteFornecedor();
                 ConexaoBanco();
+
+                if (email.getCodEmail() ==0)
+                    edtCodEmail.setText(String.valueOf(Utilidades.AutoCodigo("Email", "_id", conn,"clientefornecedor = ? and tipoclifor = ?",new String[]{String.valueOf(email.getClienteFornecedor().getCodCliFor()),String.valueOf(email.getClienteFornecedor().getTipo())})));
                 PreencheCampos();
 
             }
