@@ -2,6 +2,7 @@ package com.lincolnueda.sismei.Cadastros;
 
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
@@ -62,7 +63,7 @@ public class actAdicMaterialProd extends Activity implements View.OnClickListene
         btnExAdProd.setOnClickListener(this);
         btnExAdProd.setVisibility(View.INVISIBLE);
 
-        NomeMaterial nome = new NomeMaterial();
+        NomeMaterial nome = new NomeMaterial(this);
         edtAdCodProd.setOnFocusChangeListener(nome);
 
         setResult(0, intent);
@@ -97,20 +98,23 @@ public class actAdicMaterialProd extends Activity implements View.OnClickListene
                 int cod = Integer.parseInt(edtAdCodProd.getText().toString());
                 Material material = repMat.EncontraMaterial(conn, cod);
                 //altera a quantidade do objeto para a quantidade digitada
-                material.setQuant(Double.parseDouble(edtAdQuantProd.getText().toString()));
-
-                if (posicao == -1) {
-                    produto.getListaMateriais().add(material);
-                    msg.setMessage("Material Adicionado.");
-
-                }
+                if (material.getCodmat() == 0)
+                    msg.setMessage("Não existe material cadastrado com o código " + edtAdCodProd.getText().toString());
                 else {
-                    produto.getListaMateriais().set(posicao,material);
-                    msg.setMessage("Material Atualizado.");
+                    material.setQuant(Double.parseDouble(edtAdQuantProd.getText().toString()));
+
+                    if (posicao == -1) {
+                        produto.getListaMateriais().add(material);
+                        msg.setMessage("Material Adicionado.");
+
+                    } else {
+                        produto.getListaMateriais().set(posicao, material);
+                        msg.setMessage("Material Atualizado.");
+                    }
+                    intent.putExtra("materialProd", produto);
+                    setResult(1, intent);
+                    LimpaCampos();
                 }
-                intent.putExtra("materialProd", produto);
-                setResult(1, intent);
-                LimpaCampos();
             }catch (Exception e){
                 msg.setMessage("Erro" + e.getMessage());
             }
@@ -169,6 +173,8 @@ public class actAdicMaterialProd extends Activity implements View.OnClickListene
     }
 
     private class NomeMaterial implements View.OnClickListener, View.OnFocusChangeListener {
+        public NomeMaterial(Context context){ this.context = context;}
+        private Context context;
         @Override
         public void onClick(View v) {
             BuscaNome();
@@ -185,12 +191,15 @@ public class actAdicMaterialProd extends Activity implements View.OnClickListene
                 RepositorioMaterial repMat = new RepositorioMaterial(conn);
                 int cod = Integer.parseInt(edtAdCodProd.getText().toString());
                 Material material = repMat.EncontraMaterial(conn, cod);
-                lblNomeMaterial.setText(material.getNomemat());
+                if (material.getCodmat() > 0)
+                    lblNomeMaterial.setText(material.getNomemat());
+                else {
+                    AlertDialog.Builder msg = new AlertDialog.Builder(this.context);
+                    msg.setMessage("Não existe material cadastrado com o código " + edtAdCodProd.getText().toString());
+                    msg.setNeutralButton("OK", null);
+                    msg.show();
+                }
             }
         }
-
-
-
-
     }
 }

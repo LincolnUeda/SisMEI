@@ -107,18 +107,24 @@ public class RepositorioProduto {
         Produto produto = new Produto();
         ClienteFornecedor fornecedor;
         Cursor buscaprod = conn.query("Produto",null,"_id = ?",new String[]{String.valueOf(codprod)},null,null,null);
-        buscaprod.moveToFirst();
-        do{
-            produto.setCodProd(buscaprod.getInt(0));
-            produto.setNomeProd(buscaprod.getString(1));
-            produto.setPrecoProd(buscaprod.getDouble(3));
-            produto.setQuant(buscaprod.getInt(4));
+       if(buscaprod.getCount() > 0){ //verifica se encontrou algum produto com o codigo digitado
+            buscaprod.moveToFirst();
+            do {
+                produto.setCodProd(buscaprod.getInt(0));
+                produto.setNomeProd(buscaprod.getString(1));
+                produto.setPrecoProd(buscaprod.getDouble(3));
+                produto.setQuant(buscaprod.getInt(4));
 
-            produto.setListaMateriais(BuscaMateriaisProduto(context, produto));
+                produto.setListaMateriais(BuscaMateriaisProduto(context, produto));
 
-        }while(buscaprod.moveToNext());
-        //fim da busca produto;
-        return produto;
+            } while (buscaprod.moveToNext());
+            //fim da busca produto;
+            return produto;
+        }else{
+           //não encontrou produto
+            produto.setCodProd(0);
+           return produto;
+        }
     }//fim encontraproduto
 
 

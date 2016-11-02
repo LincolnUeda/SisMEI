@@ -78,9 +78,6 @@ public class actAdicProd extends Activity implements View.OnClickListener {
             }
 
         }
-
-
-
     }
 
 
@@ -93,21 +90,24 @@ public class actAdicProd extends Activity implements View.OnClickListener {
                 RepositorioProduto repProd = new RepositorioProduto(conn);
                 int cod = Integer.parseInt(edtAdCodProd.getText().toString());
                 Produto produto = repProd.EncontraProduto(conn, this, cod);
-                //altera a quantidade do objeto para a quantidade digitada
-                produto.setQuant(Double.parseDouble(edtAdQuantProd.getText().toString()));
+                if (produto.getCodProd() == 0){ //verifica se o produto existe
+                    msg.setMessage(" Não existe produto cadastrado com o código " + edtAdCodProd.getText().toString());
+                }else {
+                    //altera a quantidade do objeto para a quantidade digitada
+                    produto.setQuant(Double.parseDouble(edtAdQuantProd.getText().toString()));
 
-                if (posicao == -1) {
-                    pedido.getListaProdutos().add(produto);
-                    msg.setMessage("Produto Adicionado.");
+                    if (posicao == -1) {
+                        pedido.getListaProdutos().add(produto);
+                        msg.setMessage("Produto Adicionado.");
 
+                    } else {
+                        pedido.getListaProdutos().set(posicao, produto);
+                        msg.setMessage("Produto Atualizado.");
+                    }
+                    intent.putExtra("ProdutoPed", pedido);
+                    setResult(1, intent);
+                    LimpaCampos();
                 }
-                else {
-                    pedido.getListaProdutos().set(posicao,produto);
-                    msg.setMessage("Produto Atualizado.");
-                }
-                intent.putExtra("ProdutoPed", pedido);
-                setResult(1, intent);
-                LimpaCampos();
             }catch (Exception e){
                 msg.setMessage("Erro" + e.getMessage());
             }
@@ -136,9 +136,6 @@ public class actAdicProd extends Activity implements View.OnClickListener {
         }
 
     }
-
-
-
 
     private void LimpaCampos(){
         edtAdCodProd.setText("");
@@ -190,7 +187,16 @@ public class actAdicProd extends Activity implements View.OnClickListener {
                 RepositorioProduto repProd = new RepositorioProduto(conn);
                 int cod = Integer.parseInt(edtAdCodProd.getText().toString());
                 Produto produto = repProd.EncontraProduto(conn,context,cod);
-                lblNomeProduto.setText(produto.getNomeProd());
+                if (produto.getCodProd() > 0)
+                    lblNomeProduto.setText(produto.getNomeProd());
+                else{
+                    AlertDialog.Builder msg = new AlertDialog.Builder(this.context);
+                    msg.setMessage(" Não existe produto cadastrado com o código " + edtAdCodProd.getText().toString());
+                    msg.setNeutralButton("OK", null);
+                    msg.show();
+                }
+
+
             }
         }
 

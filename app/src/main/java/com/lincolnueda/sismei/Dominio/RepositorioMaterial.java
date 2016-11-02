@@ -68,19 +68,23 @@ public class RepositorioMaterial {
         Material material = new Material();
         ClienteFornecedor fornecedor;
         Cursor buscamat = conn.query("Material",null,"_id = ?",new String[]{String.valueOf(codfor)},null,null,null);
-        buscamat.moveToFirst();
-        do{
-            material.setCodmat(buscamat.getInt(0));
-            material.setNomemat(buscamat.getString(1));
-            material.setCormat(buscamat.getString(2));
-            material.setUnidmed(buscamat.getString(3));
-            material.setQuant(buscamat.getDouble(4));
-            material.setValunid(buscamat.getDouble(5));
-            RepositorioClienteFornecedor repForn = new RepositorioClienteFornecedor(conn);
-            fornecedor =  repForn.EncontraClienteFornecedor(conn,buscamat.getInt(6),"for"); // busca fornecedor no banco
-            material.setFornecedor(fornecedor);
-        }while(buscamat.moveToNext());
-        //fim da busca material;
+        if (buscamat.getCount() > 0) {
+            buscamat.moveToFirst();
+            do {
+                material.setCodmat(buscamat.getInt(0));
+                material.setNomemat(buscamat.getString(1));
+                material.setCormat(buscamat.getString(2));
+                material.setUnidmed(buscamat.getString(3));
+                material.setQuant(buscamat.getDouble(4));
+                material.setValunid(buscamat.getDouble(5));
+                RepositorioClienteFornecedor repForn = new RepositorioClienteFornecedor(conn);
+                fornecedor = repForn.EncontraClienteFornecedor(conn, buscamat.getInt(6), "for"); // busca fornecedor no banco
+                material.setFornecedor(fornecedor);
+            } while (buscamat.moveToNext());
+            //fim da busca material;
+        }else{
+            material.setCodmat(0);
+        }
         return material;
     }//fim encontramaterial
 
